@@ -11,6 +11,7 @@ sysctl -p
 apt-get update && apt-get install -y ffmpeg wget
 mkdir -p /home/ffmpeg
 wget https://github.com/leduong/recording-ffmpeg/raw/refs/heads/main/recording -O /home/ffmpeg/recording
+chmod +x recording
 
 cat <<EOL >> /etc/systemd/system/ffmpeg.service
 [Unit]
