@@ -12,7 +12,7 @@ apt-get update && apt-get install -y ffmpeg wget
 mkdir -p /home/ffmpeg
 wget https://github.com/leduong/recording-ffmpeg/raw/refs/heads/main/recording -O /home/ffmpeg/recording
 wget https://github.com/leduong/recording-ffmpeg/raw/refs/heads/main/run.sh -O /home/ffmpeg/run.sh
-chmod +x recording run.sh
+chmod +x /home/ffmpeg/recording /home/ffmpeg/run.sh
 
 cat <<EOL >> /etc/systemd/system/ffmpeg.service
 [Unit]
