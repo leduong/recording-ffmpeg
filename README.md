@@ -21,6 +21,6 @@ curl -fsSL https://github.com/leduong/recording-ffmpeg/raw/refs/heads/main/insta
 ```
 http://YOUR_IP:8084
 Username: admin
-Password: 1
+Password: admin
 ```
  
