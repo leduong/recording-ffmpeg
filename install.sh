@@ -17,8 +17,8 @@ add_line_if_not_exists() {
 add_line_if_not_exists "fs.file-max = 1048576" /etc/sysctl.conf
 add_line_if_not_exists "net.core.somaxconn=65535" /etc/sysctl.conf
 add_line_if_not_exists "net.ipv4.tcp_max_syn_backlog=4096" /etc/sysctl.conf
-add_line_if_not_exists "o11 soft nofile 1048576" /etc/security/limits.conf
-add_line_if_not_exists "o11 hard nofile 1048576" /etc/security/limits.conf
+add_line_if_not_exists "root soft nofile 1048576" /etc/security/limits.conf
+add_line_if_not_exists "root hard nofile 1048576" /etc/security/limits.conf
 add_line_if_not_exists "DefaultLimitNOFILE=204890:524288" /etc/systemd/system.conf
 sysctl -p
 
