@@ -24,10 +24,18 @@ sysctl -p
 
 apt-get update && apt-get install -y ffmpeg wget
 mkdir -p /home/ffmpeg
+rm -f /home/ffmpeg/recording /home/ffmpeg/run.sh
 wget -O /home/ffmpeg/recording https://github.com/leduong/recording-ffmpeg/raw/refs/heads/main/recording
 wget -O /home/ffmpeg/run.sh https://github.com/leduong/recording-ffmpeg/raw/refs/heads/main/run.sh
 chmod +x /home/ffmpeg/recording /home/ffmpeg/run.sh
 
+if ! id -u ffmpeg >/dev/null 2>&1; then
+    echo "Creating user 'ffmpeg'..."
+    adduser --disabled-password --shell /bin/bash --gecos "Recording FFmpeg" ffmpeg
+    chown -R ffmpeg:ffmpeg /home/ffmpeg
+else
+    echo "User 'ffmpeg' already exists."
+fi
 
 cat <<EOL > /etc/systemd/system/ffmpeg.service
 [Unit]
@@ -38,9 +46,9 @@ After=network.target
 ExecStart=/home/ffmpeg/run.sh
 WorkingDirectory=/home/ffmpeg
 Restart=always
-User=root
-StandardOutput=append:/var/log/ffmpeg.log
-StandardError=append:/var/log/ffmpeg.log
+User=ffmpeg
+StandardOutput=append:/home/ffmpeg/ffmpeg.log
+StandardError=append:/home/ffmpeg/ffmpeg.log
 
 [Install]
 WantedBy=multi-user.target
